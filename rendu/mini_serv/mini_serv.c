@@ -10,12 +10,12 @@
 typedef struct client {
     int     id;
     int     len;
-    char    msg[1024];
+    char    msg[200000];
 } t_cient;
 
 fd_set  readfds, writefds, active;
 int     fd_max = 0, next_id = 0;
-char    r_buff[1024], w_buff[1024];
+char    r_buff[200000], w_buff[200000];
 t_cient clients[1024];
 
 void err(void) {
@@ -58,7 +58,7 @@ int main(int ac, char **av) {
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
         err();
 
-	if (listen(sockfd, 1024) != 0)
+	if (listen(sockfd, 10) != 0)
         err();
 
     while (1) {
