@@ -25,7 +25,7 @@ void err(void) {
 
 void send_all(int c) {
     for (int i=0;i <= fd_max; i++)
-        if (FD_ISSET(i, &writefds) & i != c)
+        if (FD_ISSET(i, &writefds) && (i != c)) //!!
             send(i, w_buff, strlen(w_buff), 0);
 }
 
@@ -101,8 +101,8 @@ int main(int ac, char **av) {
                                 sprintf(w_buff, "client %d: %s", clients[fd].id, clients[fd].msg);
                                 send_all(fd);
                             }
+                            break;
                         }
-                        break;
                     }
                 }
             }
